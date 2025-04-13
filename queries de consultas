@@ -1,0 +1,38 @@
+## Queries de consultas SQL 
+
+# Algum vendedor também é fornecedor?
+SELECT v.razaoSocial, v.CNPJ
+FROM vendedor v
+JOIN fornecedor f ON v.CNPJ = f.CNPJ;
+
+# Relação de produtos, fornecedores e estoques
+SELECT pr.Pname AS Produto, f.nomeFantasia AS Fornecedor, e.quantidade AS Estoque
+FROM product pr
+JOIN produtoFornecedor pf ON pr.idProduct = pf.idProduct
+JOIN fornecedor f ON pf.idFornecedor = f.idFornecedor
+JOIN estoque e ON pr.idProduct = e.idProduct;
+
+# Relação de nomes dos fornecedores e nomes dos produtos
+SELECT f.nomeFantasia AS Fornecedor, pr.Pname AS Produto
+FROM fornecedor f
+JOIN produtoFornecedor pf ON f.idFornecedor = pf.idFornecedor
+JOIN product pr ON pf.idProduct = pr.idProduct;
+
+#  Quais são os produtos com estoque abaixo de um determinado limite (por exemplo, 10 unidades)?
+SELECT pr.Pname AS Produto, e.quantidade AS Estoque
+FROM product pr
+JOIN estoque e ON pr.idProduct = e.idProduct
+WHERE e.quantidade < 10;
+
+# Quais clientes realizaram pedidos com status de "cancelado"?
+SELECT c.Fname AS Nome, c.Lname AS Sobrenome, p.idPedido AS PedidoID, p.statusPedido AS Status
+FROM clients c
+JOIN pedido p ON c.idClient = p.idOrderClient
+WHERE p.statusPedido = 'cancelado'
+ORDER BY c.Fname;
+
+# Qual a média de avaliação dos produtos por categoria?
+
+SELECT pr.category AS Categoria, AVG(pr.avaliacao) AS MediaAvaliacao
+FROM product pr
+GROUP BY pr.category;
