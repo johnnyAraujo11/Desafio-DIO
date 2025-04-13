@@ -1,0 +1,108 @@
+# Criando cenário de E-commerce
+
+CREATE DATABASE ecommerce;
+use ecommerce;
+
+-- Criando tabelas:
+
+-- Cliente
+CREATE TABLE clients(
+	idClient INT AUTO_INCREMENT PRIMARY KEY,
+	Fname VARCHAR(15),
+    Minit CHAR(3),
+    Lname VARCHAR(20),
+    CPF CHAR(11),
+    Address VARCHAR(45),
+    
+    CONSTRAINT unique_cpf_client UNIQUE(CPF)
+);
+-- Produto
+
+CREATE TABLE product(
+	idProduct INT AUTO_INCREMENT PRIMARY KEY,
+	Pname VARCHAR(15) NOT NULL,
+    descricao VARCHAR(100),
+    category enum('eletronico','vestimenta','brinquedo','cozinha') NOT NULL,
+    avaliacao float DEFAULT 0
+);
+
+-- Pagamento
+CREATE TABLE pagamento(
+	idPagamento INT,
+	formaPagamento ENUM('credito', 'pix', 'debito') NOT NULL,
+	idPagamentoClient INT,
+    
+    PRIMARY KEY(idPagamento, idPagamentoClient)
+);
+
+
+-- Pedido
+CREATE TABLE pedido(
+	idPedido INT AUTO_INCREMENT PRIMARY KEY,
+    descricao VARCHAR(100),
+    statusPedido enum('entregue','preparacao','enviado', 'cancelado', 'confirmado') NOT NULL,
+    DescricaoPedido VARCHAR(255),
+    fretePedido FLOAT,
+    
+    idOrderClient INT,
+    CONSTRAINT fk_pedido_client FOREIGN KEY (idOrderClient) REFERENCES clients(idClient),
+    idPagamento INT,
+	CONSTRAINT fk_pedido_pagamento FOREIGN KEY (idPagamento) REFERENCES pagamento(idPagamento)
+);
+
+-- Relação entre pedido tem produtos
+CREATE TABLE pedidoTemProduct(
+	idPedido INT,
+    idProduct INT,
+    
+    PRIMARY KEY(idPedido, idProduct)
+);
+
+-- Estoque
+CREATE TABLE estoque(
+	idEstoque INT AUTO_INCREMENT PRIMARY KEY,
+	quantidade INT NOT NULL,
+    
+	idProduct INT,
+	CONSTRAINT fk_estoque_produtc FOREIGN KEY (idProduct) REFERENCES product (idProduct)
+ 
+);
+
+
+-- Fornecedor
+CREATE TABLE fornecedor(
+	idFornecedor INT AUTO_INCREMENT PRIMARY KEY,
+	razaoSocial VARCHAR(50) NOT NULL,
+    CNPJ CHAR(15) NOT NULL,
+    nomeFantasia VARCHAR(50),
+    
+	CONSTRAINT unique_razaoSocial_fornecedor UNIQUE(razaoSocial),
+    CONSTRAINT unique_CNPJ_fornecedor UNIQUE(CNPJ)
+);
+
+-- Vendedor
+CREATE TABLE vendedor(
+	idVendedor INT AUTO_INCREMENT PRIMARY KEY,
+	razaoSocial VARCHAR(50) NOT NULL,
+    CNPJ CHAR(15) NOT NULL,
+    nomeFantasia VARCHAR(50),
+    
+	CONSTRAINT unique_razaoSocial_fornecedor UNIQUE(razaoSocial),
+    CONSTRAINT unique_CNPJ_fornecedor UNIQUE(CNPJ)
+);
+
+-- Relação entre n:n de produto e vendedor
+CREATE TABLE vendendorProduct(
+	idVendedor INT,
+    idProduct INT,
+    
+    PRIMARY KEY(idVendedor, idProduct)
+);
+
+-- Relação n:n de produto e fornecedor
+CREATE TABLE produtoFornecedor(
+	idFornecedor INT,
+    idProduct INT,
+    
+    PRIMARY KEY(idFornecedor, idProduct)
+);
