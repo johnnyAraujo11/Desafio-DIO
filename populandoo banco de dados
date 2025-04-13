@@ -1,0 +1,121 @@
+USE ecommerce;
+
+-- Inserindo clientes
+INSERT INTO clients (Fname, Minit, Lname, CPF, Address) VALUES
+('Ana', 'M', 'Silva', '12345678901', 'Rua A, 100'),
+('Bruno', 'K', 'Souza', '22345678901', 'Rua B, 200'),
+('Carlos', 'L', 'Oliveira', '32345678901', 'Rua C, 300'),
+('Daniela', 'A', 'Pereira', '42345678901', 'Rua D, 400'),
+('Eduardo', 'J', 'Costa', '52345678901', 'Rua E, 500'),
+('Fernanda', 'M', 'Lima', '62345678901', 'Rua F, 600'),
+('Gabriel', 'R', 'Martins', '72345678901', 'Rua G, 700'),
+('Helena', 'T', 'Barros', '82345678901', 'Rua H, 800'),
+('Igor', 'S', 'Ramos', '92345678901', 'Rua I, 900'),
+('Julia', 'C', 'Moura', '03345678901', 'Rua J, 1000');
+
+-- Inserindo produtos
+INSERT INTO product (Pname, descricao, category, avaliacao) VALUES
+('Notebook', 'Notebook com 8GB RAM', 'eletronico', 4.5),
+('Smartphone', 'Celular Android 128GB', 'eletronico', 4.8),
+('Camiseta', 'Camiseta 100% algodão', 'vestimenta', 4.2),
+('Panela', 'Panela antiaderente', 'cozinha', 4.3),
+('Boneca', 'Boneca de pano', 'brinquedo', 4.6),
+('Fogão', 'Fogão 4 bocas', 'cozinha', 4.1),
+('Tablet', 'Tablet 10 polegadas', 'eletronico', 4.4),
+('Tênis', 'Tênis esportivo', 'vestimenta', 4.7),
+('Liquidificador', 'Liquidificador 800W', 'cozinha', 4.0),
+('Carrinho', 'Carrinho de brinquedo', 'brinquedo', 4.5),
+('TV', 'Smart TV 50"', 'eletronico', 4.9),
+('Vestido', 'Vestido longo', 'vestimenta', 4.3),
+('Micro-ondas', 'Micro-ondas 30L', 'cozinha', 4.2),
+('Jogo Educativo', 'Jogo de montar', 'brinquedo', 4.6),
+('Headphone', 'Fone com cancelamento', 'eletronico', 4.7),
+('Shorts', 'Shorts jeans', 'vestimenta', 4.1),
+('Forno', 'Forno elétrico', 'cozinha', 4.0),
+('Quebra-Cabeça', 'Puzzle 1000 peças', 'brinquedo', 4.8),
+('Cafeteira', 'Cafeteira elétrica', 'cozinha', 4.4),
+('Jaqueta', 'Jaqueta de couro sintético', 'vestimenta', 4.6);
+
+-- Inserindo fornecedores
+INSERT INTO fornecedor (razaoSocial, CNPJ, nomeFantasia) VALUES
+('Fornecedor Alpha Ltda', '11111111111111', 'Alpha'),
+('Fornecedor Beta Ltda', '21111111111111', 'Beta'),
+('Fornecedor Gama Ltda', '31111111111111', 'Gama'),
+('Fornecedor Delta Ltda', '41111111111111', 'Delta'),
+('Fornecedor Epsilon Ltda', '51111111111111', 'Epsilon'),
+('Fornecedor Zeta Ltda', '61111111111111', 'Zeta'),
+('Fornecedor Eta Ltda', '71111111111111', 'Eta'),
+('Fornecedor Theta Ltda', '81111111111111', 'Theta'),
+('Fornecedor Iota Ltda', '91111111111111', 'Iota'),
+('Fornecedor Kappa Ltda', '10111111111111', 'Kappa'),
+('Fornecedor Lambda Ltda', '12111111111111', 'Lambda'),
+('Fornecedor Mu Ltda', '13111111111111', 'Mu'),
+('Fornecedor Nu Ltda', '14111111111111', 'Nu'),
+('Fornecedor Xi Ltda', '15111111111111', 'Xi'),
+('Fornecedor Omicron Ltda', '16111111111111', 'Omicron');
+
+-- Inserindo vendedores
+INSERT INTO vendedor (razaoSocial, CNPJ, nomeFantasia) VALUES
+('Vendedor Uno Ltda', '11222222222222', 'Uno'),
+('Vendedor Duo Ltda', '21222222222222', 'Duo'),
+('Vendedor Trio Ltda', '31222222222222', 'Trio'),
+('Vendedor Quatro Ltda', '41222222222222', 'Quatro'),
+('Vendedor Cinco Ltda', '51222222222222', 'Cinco'),
+('Vendedor Seis Ltda', '61222222222222', 'Seis'),
+('Vendedor Sete Ltda', '71222222222222', 'Sete'),
+('Vendedor Oito Ltda', '81222222222222', 'Oito'),
+('Vendedor Nove Ltda', '91222222222222', 'Nove'),
+('Vendedor Dez Ltda', '10122222222222', 'Dez');
+
+-- Relacionando produtos com fornecedores
+INSERT INTO produtoFornecedor (idFornecedor, idProduct) VALUES
+(1,1), (2,2), (3,3), (4,4), (5,5),
+(6,6), (7,7), (8,8), (9,9), (10,10),
+(11,11), (12,12), (13,13), (14,14), (15,15),
+(1,16), (2,17), (3,18), (4,19), (5,20);
+
+-- Relacionando produtos com vendedores
+INSERT INTO vendendorProduct (idVendedor, idProduct) VALUES
+(1,1), (2,2), (3,3), (4,4), (5,5),
+(6,6), (7,7), (8,8), (9,9), (10,10),
+(1,11), (2,12), (3,13), (4,14), (5,15),
+(6,16), (7,17), (8,18), (9,19), (10,20);
+
+-- Inserindo estoque
+INSERT INTO estoque (quantidade, idProduct) VALUES
+(100, 1), (80, 2), (50, 3), (40, 4), (60, 5),
+(70, 6), (90, 7), (75, 8), (110, 9), (65, 10),
+(55, 11), (85, 12), (95, 13), (120, 14), (45, 15),
+(35, 16), (130, 17), (150, 18), (140, 19), (125, 20);
+
+-- Inserindo pagamentos
+INSERT INTO pagamento (idPagamento, formaPagamento, idPagamentoClient) VALUES
+(1, 'credito', 1),
+(2, 'pix', 2),
+(3, 'debito', 3),
+(4, 'credito', 4),
+(5, 'pix', 5),
+(6, 'credito', 6),
+(7, 'debito', 7),
+(8, 'pix', 8),
+(9, 'credito', 9),
+(10, 'debito', 10);
+
+-- Inserindo pedidos
+INSERT INTO pedido (descricao, statusPedido, DescricaoPedido, fretePedido, idOrderClient, idPagamento) VALUES
+('Pedido notebook', 'entregue', null, 20.0, 1, 1),
+('Pedido celular', 'preparacao', 'Smartphone Samsung', 15.0, 2, 2),
+('Pedido camiseta', 'enviado', 'Camiseta preta', 10.0, 3, 3),
+('Pedido panela', 'cancelado', 'Panela grande', 12.0, 4, 4),
+('Pedido boneca', 'confirmado', null, 8.0, 5, 5),
+('Pedido TV', 'entregue', 'Smart TV LG', 25.0, 6, 6),
+('Pedido tablet', 'enviado', 'Tablet Android', 18.0, 7, 7),
+('Pedido tênis', 'confirmado', null, 14.0, 8, 8),
+('Pedido liquidificador', 'preparacao', 'Liquidificador Philco', 13.0, 9, 9),
+('Pedido vestido', 'entregue', 'Vestido floral', 11.0, 10, 10);
+
+-- Relacionando produtos com pedidos
+INSERT INTO pedidoTemProduct (idPedido, idProduct) VALUES
+(1, 1), (2, 2), (3, 3), (4, 4), (5, 5),
+(6, 11), (7, 7), (8, 8), (9, 9), (10, 12);
+
